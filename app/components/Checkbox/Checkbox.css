@@ -1,0 +1,7 @@
+.checkbox-wrapper {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+
+  accent-color: var(--color-primary);
+}

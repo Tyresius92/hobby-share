@@ -1,0 +1,8 @@
+.flex-component {
+  display: flex;
+  flex-direction: var(--flex-comp-direction);
+  justify-content: var(--flex-comp-justify-content);
+  align-items: var(--flex-comp-align-items);
+
+  gap: var(--flex-comp-gap);
+}

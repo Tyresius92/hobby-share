@@ -1,0 +1,8 @@
+.text-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-input-error-message {
+  color: var(--color-red-700);
+}

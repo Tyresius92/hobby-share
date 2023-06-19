@@ -1,5 +1,6 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import styles from "./Box.css";
+import type { ColorVariant } from "~/colors";
 
 const links = () => [{ rel: "stylesheet", href: styles }];
 
@@ -42,6 +43,8 @@ export interface InternalBoxProps {
 
   className?: string;
   style?: React.CSSProperties;
+
+  bg?: ColorVariant;
 }
 
 export const InternalBox = ({
@@ -60,13 +63,16 @@ export const InternalBox = ({
   mr = mx,
   mt = my,
   mb = my,
+  bg = undefined,
   className,
   style,
   ...rest
 }: InternalBoxProps): JSX.Element => {
   return (
     <div
-      className={`box-component ${className ?? ""}`}
+      className={`box-component ${bg ? "box-component-background" : ""} ${
+        className ?? ""
+      }`}
       style={
         {
           ...style,
@@ -78,17 +84,40 @@ export const InternalBox = ({
           "--box-comp-margin-block-end": `var(--space-${mb})`,
           "--box-comp-margin-inline-start": `var(--space-${ml})`,
           "--box-comp-margin-inline-end": `var(--space-${mr})`,
+          ...(bg && {
+            "--box-comp-background-color": `var(--color-${bg})`,
+          }),
         } as React.CSSProperties
       }
       {...rest}
     >
-      {children}
+      {bg ? (
+        <BoxContext.Provider
+          value={{
+            backgroundColor: bg,
+          }}
+        >
+          {children}
+        </BoxContext.Provider>
+      ) : (
+        <>{children}</>
+      )}
     </div>
   );
 };
 
 export interface BoxProps
   extends Omit<InternalBoxProps, "className" | "style"> {}
+
+interface BoxContextShape {
+  backgroundColor: ColorVariant;
+}
+
+const BoxContext = createContext<BoxContextShape>({
+  backgroundColor: "white",
+});
+
+export const useBoxContext = () => useContext(BoxContext);
 
 export const Box = (props: BoxProps): JSX.Element => {
   return <InternalBox {...props} />;

@@ -9,3 +9,7 @@
   margin-inline-start: var(--box-comp-margin-inline-start, 0);
   margin-inline-end: var(--box-comp-margin-inline-end, 0);
 }
+
+.box-component-background {
+  background-color: var(--box-comp-background-color);
+}

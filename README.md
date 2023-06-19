@@ -216,4 +216,20 @@ We use [Prettier](https://prettier.io/) for auto-formatting in this project. It'
 
 Open `~/prisma/schema.prisma`, and modify the file to reflect the new desired state of the database.
 
-Then, run `npx prisma migrate dev`. 
+Then, run `npx prisma migrate dev` to apply your changes.
+
+#### If your changes break the schema
+
+You can run `npx prisma migrate reset` to drop your local DB. It will try to run the seed command, but it will likely fail, unless you've updated `~/prisma/seed.ts` already. (You should do this anyway.)
+
+Assuming the seed command failed, update the `~/prisma/seed.ts` file, then run `npx prisma migrate dev` again.
+
+#### Alternate method that does not require dropping the local db
+
+When you run `npx prisma migrate dev` the first time, it should generate a migration file. You can write the raw SQL to update the database appropriately.
+
+Once we get to production, this will be the path forward anyway.
+
+### Seeding the database
+
+Run `npx prisma db seed`.

@@ -1,7 +1,13 @@
-import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import type {
+  ActionArgs,
+  LinksFunction,
+  LoaderArgs,
+  V2_MetaFunction,
+} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
+import { Box, Button, Checkbox, TextInput } from "~/components";
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -13,6 +19,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   return json({});
 };
 
+// TODO: make it possible to sign in with email OR username
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
   const email = formData.get("email");
@@ -60,9 +67,16 @@ export const action = async ({ request }: ActionArgs) => {
 
 export const meta: V2_MetaFunction = () => [{ title: "Login" }];
 
+export const links: LinksFunction = () => [
+  ...Box.links(),
+  ...Button.links(),
+  ...TextInput.links(),
+  ...Checkbox.links(),
+];
+
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/notes";
+  const redirectTo = searchParams.get("redirectTo") || "/";
   const actionData = useActionData<typeof action>();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -76,68 +90,46 @@ export default function LoginPage() {
   }, [actionData]);
 
   return (
-    <div>
-      <div>
-        <Form method="post">
-          <div>
-            <label htmlFor="email">Email address</label>
-            <div>
-              <input
-                ref={emailRef}
-                id="email"
-                required
-                autoFocus={true}
-                name="email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={actionData?.errors?.email ? true : undefined}
-                aria-describedby="email-error"
-              />
-              {actionData?.errors?.email ? (
-                <div>{actionData.errors.email}</div>
-              ) : null}
-            </div>
-          </div>
+    <Box m={4} mx={8}>
+      <Form method="post">
+        <TextInput
+          label="Email address"
+          required
+          autoFocus={true}
+          name="email"
+          type="email"
+          autoComplete="email"
+          errorMessage={actionData?.errors?.email ?? undefined}
+        />
 
-          <div>
-            <label htmlFor="password">Password</label>
-            <div>
-              <input
-                id="password"
-                ref={passwordRef}
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                aria-invalid={actionData?.errors?.password ? true : undefined}
-                aria-describedby="password-error"
-              />
-              {actionData?.errors?.password ? (
-                <div>{actionData.errors.password}</div>
-              ) : null}
-            </div>
-          </div>
+        <TextInput
+          label="Password"
+          ref={passwordRef}
+          required
+          autoFocus={true}
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          errorMessage={actionData?.errors?.password ?? undefined}
+        />
 
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <button type="submit">Log in</button>
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+        <Button type="submit">Log in</Button>
+        <div>
+          <Checkbox name="remember" label="Remember me" />
           <div>
-            <div>
-              <input id="remember" name="remember" type="checkbox" />
-              <label htmlFor="remember">Remember me</label>
-            </div>
-            <div>
-              Don't have an account?{" "}
-              <Link
-                to={{
-                  pathname: "/join",
-                  search: searchParams.toString(),
-                }}
-              >
-                Sign up
-              </Link>
-            </div>
+            Don't have an account?{" "}
+            <Link
+              to={{
+                pathname: "/join",
+                search: searchParams.toString(),
+              }}
+            >
+              Sign up
+            </Link>
           </div>
-        </Form>
-      </div>
-    </div>
+        </div>
+      </Form>
+    </Box>
   );
 }

@@ -1,0 +1,24 @@
+#global-nav .site-title {
+  color: var(--navbar-contrast-color);
+}
+
+#global-nav .navbar-link {
+  color: var(--navbar-contrast-color);
+}
+
+#global-nav .navbar-link:hover {
+  text-decoration: none;
+}
+
+#global-nav .navbar-logout-button {
+  background-color: var(--color-secondary);
+  border: none;
+
+  border-radius: var(--border-radius-3);
+
+  padding: var(--space-1) var(--space-3);
+}
+
+#global-nav .navbar-logout-button:hover {
+  background-color: var(--color-secondary-dark);
+}

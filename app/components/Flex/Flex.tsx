@@ -46,3 +46,5 @@ export const Flex = ({
     </InternalBox>
   );
 };
+
+Flex.links = links;

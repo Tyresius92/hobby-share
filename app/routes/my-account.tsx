@@ -1,14 +1,13 @@
-import { NavLink, useLoaderData } from "@remix-run/react";
+import React from "react";
+import { useLoaderData } from "@remix-run/react";
 import {
   LinksFunction,
   LoaderFunction,
   json,
   redirect,
 } from "@remix-run/server-runtime";
-import React from "react";
-import { Box } from "~/components";
+import { Box, Text } from "~/components";
 import { getUser } from "~/session.server";
-import { useOptionalUser, useUser } from "~/utils";
 
 export const links: LinksFunction = () => [...Box.links()];
 
@@ -16,7 +15,13 @@ export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
 
   if (!user) {
-    return redirect("/login?redirectTo=/my-account");
+    const searchParams = new URLSearchParams()
+    searchParams.append(
+      'redirectTo',
+      '/my-account'
+    )
+
+    return redirect(`/login?${searchParams}`);
   }
 
   return json({
@@ -31,6 +36,20 @@ export default function MyAccount() {
       <Box>
         <h1>My Account</h1>
         <pre>{JSON.stringify(user, undefined, 2)}</pre>
+      </Box>
+      <Box>
+        <Text>
+          TODO: Add support for password resets
+        </Text>
+        <Text>
+          TODO: Add support for changing email addresses
+        </Text>
+        <Text>
+          TODO: Add support for changing username
+        </Text>
+        <Text>
+          TODO: Add a button (with modal) to delete my account
+        </Text>
       </Box>
     </main>
   );

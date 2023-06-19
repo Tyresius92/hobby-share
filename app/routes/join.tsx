@@ -207,7 +207,7 @@ export default function Join() {
   }, [actionData]);
 
   return (
-    <Box m={4} mx={8}>
+    <Box>
       <Form method="post">
         <TextInput
           label="Email address"

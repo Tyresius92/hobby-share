@@ -10,6 +10,7 @@ import {
   ScrollRestoration,
   Form,
   Link,
+  useMatches,
 } from "@remix-run/react";
 
 import { useOptionalUser } from "~/utils";
@@ -17,7 +18,7 @@ import { getUser } from "~/session.server";
 import themeStyles from "~/theme.css";
 import rootStyles from "~/root.css";
 import resetStyles from "~/reset.css";
-import { Flex, Text } from "./components";
+import { Box, Flex, Text } from "./components";
 import {
   AcceptableContrastRatios,
   getContrastColor,
@@ -38,6 +39,7 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const user = useOptionalUser();
+  const matches = useMatches();
 
   return (
     <html lang="en">
@@ -69,13 +71,18 @@ export default function App() {
             alignItems="center"
           >
             <div>
-              <h1 className="site-title">Hobby Share</h1>
+              <h1 className="site-title">
+                <Link to="/" className="navbar-link">Hobby Share</Link>
+              </h1>
             </div>
 
             <Flex gap={2} alignItems="center">
               {user ? (
                 <>
                   <Text>Hello {user.firstName}!</Text>
+                  <Link to="/my-account" className="navbar-link">
+                    My Account
+                  </Link>
                   <Form action="/logout" method="post">
                     <button className="navbar-logout-button" type="submit">
                       Logout
@@ -95,7 +102,10 @@ export default function App() {
             </Flex>
           </Flex>
         </nav>
-        <Outlet />
+
+        <Box mx={8} my={4}>
+          <Outlet />
+        </Box>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

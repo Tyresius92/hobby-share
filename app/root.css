@@ -2,6 +2,10 @@
   color: var(--navbar-contrast-color);
 }
 
+#global-nav .site-title .navbar-link {
+  text-decoration: none;
+}
+
 #global-nav .navbar-link {
   color: var(--navbar-contrast-color);
 }

@@ -10,7 +10,6 @@ import {
   ScrollRestoration,
   Form,
   Link,
-  useMatches,
 } from "@remix-run/react";
 
 import { useOptionalUser } from "~/utils";
@@ -39,7 +38,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 
 export default function App() {
   const user = useOptionalUser();
-  const matches = useMatches();
 
   return (
     <html lang="en">
@@ -72,7 +70,9 @@ export default function App() {
           >
             <div>
               <h1 className="site-title">
-                <Link to="/" className="navbar-link">Hobby Share</Link>
+                <Link to="/" className="navbar-link">
+                  Hobby Share
+                </Link>
               </h1>
             </div>
 

@@ -96,12 +96,12 @@ export const getContrastColor = (
 ): ColorVariant => {
   const bgHex = getHex(backgroundColor);
 
-  const colors: ColorVariant[] = Array.isArray(desiredForegroundColor)
+  const colorsToCheck: ColorVariant[] = Array.isArray(desiredForegroundColor)
     ? [...desiredForegroundColor, ...defaultForegroundColors]
     : [desiredForegroundColor, ...defaultForegroundColors];
 
-  for (let i = 0; i < colors.length; i++) {
-    const color = colors[i];
+  for (let i = 0; i < colorsToCheck.length; i++) {
+    const color = colorsToCheck[i];
     const fgHex = getHex(color);
     if (isContrastRatioHighEnough(bgHex, fgHex, minimumContrastRatio)) {
       return color;

@@ -1,6 +1,9 @@
 /** @type {import('@types/eslint').Linter.BaseConfig} */
 module.exports = {
   root: true,
+  parserOptions: {
+    project: "./tsconfig.json",
+  },
   extends: [
     "@remix-run/eslint-config",
     "@remix-run/eslint-config/node",
@@ -26,8 +29,6 @@ module.exports = {
     "@typescript-eslint/no-empty-function": "error",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "error",
-    "no-throw-literal": "off",
-    "@typescript-eslint/no-throw-literal": "error",
     "no-unused-expressions": "off",
     "@typescript-eslint/no-unused-expressions": "error",
     "no-unused-vars": "off",

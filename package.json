@@ -13,7 +13,7 @@
     "docker": "docker-compose up -d",
     "prettier:check": "prettier .",
     "prettier:fix": "prettier --write .",
-    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ./app",
     "lint:fix": "npm run lint -- --fix",
     "fix": "npm run prettier:fix && npm run lint:fix",
     "setup": "prisma generate && prisma migrate deploy && prisma db seed",

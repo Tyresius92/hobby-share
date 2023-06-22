@@ -1,8 +1,9 @@
 import React from "react";
 import { useLoaderData } from "@remix-run/react";
-import {
+import type {
   LinksFunction,
-  LoaderFunction,
+  LoaderFunction} from "@remix-run/server-runtime";
+import {
   json,
   redirect,
 } from "@remix-run/server-runtime";
@@ -15,11 +16,8 @@ export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
 
   if (!user) {
-    const searchParams = new URLSearchParams()
-    searchParams.append(
-      'redirectTo',
-      '/my-account'
-    )
+    const searchParams = new URLSearchParams();
+    searchParams.append("redirectTo", "/my-account");
 
     return redirect(`/login?${searchParams}`);
   }
@@ -38,18 +36,10 @@ export default function MyAccount() {
         <pre>{JSON.stringify(user, undefined, 2)}</pre>
       </Box>
       <Box>
-        <Text>
-          TODO: Add support for password resets
-        </Text>
-        <Text>
-          TODO: Add support for changing email addresses
-        </Text>
-        <Text>
-          TODO: Add support for changing username
-        </Text>
-        <Text>
-          TODO: Add a button (with modal) to delete my account
-        </Text>
+        <Text>TODO: Add support for password resets</Text>
+        <Text>TODO: Add support for changing email addresses</Text>
+        <Text>TODO: Add support for changing username</Text>
+        <Text>TODO: Add a button (with modal) to delete my account</Text>
       </Box>
     </main>
   );

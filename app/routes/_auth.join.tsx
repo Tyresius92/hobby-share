@@ -8,7 +8,7 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { Box, Button, TextInput } from "~/components";
+import { Box, Button, Text, TextInput } from "~/components";
 import { getUserByUsername } from "~/models/user.server";
 
 import { createUser, getUserByEmail } from "~/models/user.server";
@@ -182,11 +182,7 @@ export const action = async ({
 
 export const meta: V2_MetaFunction = () => [{ title: "Sign Up" }];
 
-export const links: LinksFunction = () => [
-  ...TextInput.links(),
-  ...Button.links(),
-  ...Box.links(),
-];
+export const links: LinksFunction = () => [];
 
 export default function Join() {
   const [searchParams] = useSearchParams();
@@ -267,15 +263,17 @@ export default function Join() {
         <input type="hidden" name="redirectTo" value={redirectTo} />
         <Button type="submit">Create Account</Button>
         <Box>
-          Already have an account?{" "}
-          <Link
-            to={{
-              pathname: "/login",
-              search: searchParams.toString(),
-            }}
-          >
-            Log in
-          </Link>
+          <Text>
+            Already have an account?{" "}
+            <Link
+              to={{
+                pathname: "/login",
+                search: searchParams.toString(),
+              }}
+            >
+              Log in
+            </Link>
+          </Text>
         </Box>
       </Form>
     </Box>

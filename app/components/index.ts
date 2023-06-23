@@ -1,3 +1,14 @@
+import type { LinksFunction } from "@remix-run/server-runtime";
+
+import { links as boxLinks } from "./Box/Box";
+import { links as buttonLinks } from "./Button/Button";
+import { links as checkboxLinks } from "./Checkbox/Checkbox";
+import { links as flexLinks } from "./Flex/Flex";
+import { links as headingLinks } from "./Heading/Heading";
+import { links as navbarLinks } from "./Navbar/Navbar";
+import { links as textLinks } from "./Text/Text";
+import { links as textInputLinks } from "./TextInput/TextInput";
+
 export { Box } from "./Box/Box";
 export type { BoxProps } from "./Box/Box";
 
@@ -10,8 +21,24 @@ export type { CheckboxProps } from "./Checkbox/Checkbox";
 export { Flex } from "./Flex/Flex";
 export type { FlexProps } from "./Flex/Flex";
 
+export { Heading } from "./Heading/Heading";
+export type { HeadingProps } from "./Heading/Heading";
+
+export { Navbar } from "./Navbar/Navbar";
+
 export { Text } from "./Text/Text";
 export type { TextProps } from "./Text/Text";
 
 export { TextInput } from "./TextInput/TextInput";
 export type { TextInputProps } from "./TextInput/TextInput";
+
+export const componentLibraryLinks: LinksFunction = () => [
+  ...boxLinks(),
+  ...buttonLinks(),
+  ...checkboxLinks(),
+  ...flexLinks(),
+  ...headingLinks(),
+  ...navbarLinks(),
+  ...textLinks(),
+  ...textInputLinks(),
+];

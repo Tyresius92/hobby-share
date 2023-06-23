@@ -8,27 +8,27 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  Form,
-  Link,
 } from "@remix-run/react";
 
-import { useOptionalUser } from "~/utils";
 import { getUser } from "~/session.server";
 import themeStyles from "~/theme.css";
-import rootStyles from "~/root.css";
 import resetStyles from "~/reset.css";
-import { Box, Flex, Text } from "./components";
-import {
-  AcceptableContrastRatios,
-  getContrastColor,
-} from "./components/__internal__/colorContrastUtils";
+import { Box, componentLibraryLinks } from "./components";
+import { Navbar } from "./components/Navbar/Navbar";
+
+const poppinsFontUrl =
+  "https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Poppins:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap";
+const cormorantGaramondFontUrl =
+  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Inter:wght@300&display=swap";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetStyles },
   { rel: "stylesheet", href: themeStyles },
-  ...Flex.links(),
-  ...Text.links(),
-  { rel: "stylesheet", href: rootStyles },
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: "preconnect", href: "https://fonts.gstatic.com", preconnect: true },
+  { rel: "stylesheet", href: poppinsFontUrl },
+  { rel: "stylesheet", href: cormorantGaramondFontUrl },
+  ...componentLibraryLinks(),
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
@@ -37,8 +37,6 @@ export const loader = async ({ request }: LoaderArgs) => {
 };
 
 export default function App() {
-  const user = useOptionalUser();
-
   return (
     <html lang="en">
       <head>
@@ -48,63 +46,13 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <nav
-          id="global-nav"
-          className="navbar"
-          style={
-            {
-              "--navbar-contrast-color": getContrastColor(
-                "primary",
-                "white",
-                AcceptableContrastRatios.TEXT
-              ),
-            } as React.CSSProperties
-          }
-        >
-          <Flex
-            bg="primary"
-            gap={2}
-            px={3}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <div>
-              <h1 className="site-title">
-                <Link to="/" className="navbar-link">
-                  Hobby Share
-                </Link>
-              </h1>
-            </div>
-
-            <Flex gap={2} alignItems="center">
-              {user ? (
-                <>
-                  <Text>Hello {user.firstName}!</Text>
-                  <Link to="/my-account" className="navbar-link">
-                    My Account
-                  </Link>
-                  <Form action="/logout" method="post">
-                    <button className="navbar-logout-button" type="submit">
-                      Logout
-                    </button>
-                  </Form>
-                </>
-              ) : (
-                <>
-                  <Link to="/join" className="navbar-link">
-                    Sign up
-                  </Link>
-                  <Link to="/login" className="navbar-link">
-                    Log In
-                  </Link>
-                </>
-              )}
-            </Flex>
-          </Flex>
-        </nav>
-
-        <Box mx={8} my={4}>
-          <Outlet />
+        <Box bg="gray-100">
+          <div id="root">
+            <Navbar />
+            <Box>
+              <Outlet />
+            </Box>
+          </div>
         </Box>
         <ScrollRestoration />
         <Scripts />

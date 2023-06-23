@@ -1,5 +1,7 @@
 import React, { useId } from "react";
 import styles from "./Checkbox.css";
+import { AcceptableContrastRatios } from "../__internal__/colorContrastUtils";
+import { useBoxContext } from "../Box/Box";
 
 export const links = () => [{ rel: "stylesheet", href: styles }];
 
@@ -30,6 +32,7 @@ const isControlledCheckbox = (
 
 export const Checkbox = (props: CheckboxProps): JSX.Element => {
   const id = useId();
+  const { getContrastColor } = useBoxContext();
 
   return (
     <div className="checkbox-wrapper">
@@ -44,9 +47,20 @@ export const Checkbox = (props: CheckboxProps): JSX.Element => {
       ) : (
         <input id={id} type="checkbox" name={props.name} value={props.value} />
       )}
-      <label htmlFor={id}>{props.label}</label>
+      <label
+        htmlFor={id}
+        className="checkbox-label"
+        style={
+          {
+            "--checkbox-label-contrast-color": `var(--color-${getContrastColor(
+              ["gray-200", "gray-100"],
+              AcceptableContrastRatios.TEXT
+            )})`,
+          } as React.CSSProperties
+        }
+      >
+        {props.label}
+      </label>
     </div>
   );
 };
-
-Checkbox.links = links;

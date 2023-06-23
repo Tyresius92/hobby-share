@@ -5,3 +5,7 @@
 
   accent-color: var(--color-primary);
 }
+
+.checkbox-label {
+  color: var(--checkbox-label-contrast-color);
+}

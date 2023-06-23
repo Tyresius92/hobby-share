@@ -1,16 +1,14 @@
 import React from "react";
 import { useLoaderData } from "@remix-run/react";
-import type {
-  LinksFunction,
-  LoaderFunction} from "@remix-run/server-runtime";
-import {
-  json,
-  redirect,
-} from "@remix-run/server-runtime";
+import type { LinksFunction, LoaderFunction } from "@remix-run/server-runtime";
+import { json, redirect } from "@remix-run/server-runtime";
 import { Box, Text } from "~/components";
 import { getUser } from "~/session.server";
+import type { V2_MetaFunction } from "@remix-run/node";
 
-export const links: LinksFunction = () => [...Box.links()];
+export const links: LinksFunction = () => [];
+
+export const meta: V2_MetaFunction = () => [{ title: "My Account" }];
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);

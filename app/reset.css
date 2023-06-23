@@ -416,7 +416,8 @@ h6 {
   8. Create a root stacking context
 */
 html,
-body {
+body,
+#root {
   isolation: isolate;
   min-height: 100vh;
 }

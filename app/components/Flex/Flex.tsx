@@ -1,10 +1,10 @@
-import { InternalBox, Box } from "../Box/Box";
+import { InternalBox, links as boxLinks } from "../Box/Box";
 import type { BoxProps, SpaceOption } from "../Box/Box";
 
 import flexStyles from "./Flex.css";
 
 export const links = () => [
-  ...Box.links(),
+  ...boxLinks(),
   { rel: "stylesheet", href: flexStyles },
 ];
 
@@ -46,5 +46,3 @@ export const Flex = ({
     </InternalBox>
   );
 };
-
-Flex.links = links;

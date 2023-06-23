@@ -1,8 +1,10 @@
 import React, { createContext, useContext } from "react";
 import styles from "./Box.css";
 import type { ColorVariant } from "~/colors";
+import type { ContrastRatios } from "../__internal__/colorContrastUtils";
+import { getContrastColor } from "../__internal__/colorContrastUtils";
 
-const links = () => [{ rel: "stylesheet", href: styles }];
+export const links = () => [{ rel: "stylesheet", href: styles }];
 
 export type SpaceOption =
   | 0
@@ -46,6 +48,18 @@ export interface InternalBoxProps {
 
   bg?: ColorVariant;
 }
+
+const wrappedGetColor =
+  (backgroundColor: ColorVariant) =>
+  (
+    desiredForegroundColor: ColorVariant | ColorVariant[],
+    minimumContrastRatio: ContrastRatios
+  ) =>
+    getContrastColor(
+      backgroundColor,
+      desiredForegroundColor,
+      minimumContrastRatio
+    );
 
 export const InternalBox = ({
   children,
@@ -95,6 +109,7 @@ export const InternalBox = ({
         <BoxContext.Provider
           value={{
             backgroundColor: bg,
+            getContrastColor: wrappedGetColor(bg),
           }}
         >
           {children}
@@ -111,10 +126,12 @@ export interface BoxProps
 
 interface BoxContextShape {
   backgroundColor: ColorVariant;
+  getContrastColor: ReturnType<typeof wrappedGetColor>;
 }
 
 const BoxContext = createContext<BoxContextShape>({
   backgroundColor: "white",
+  getContrastColor: wrappedGetColor("white"),
 });
 
 export const useBoxContext = () => useContext(BoxContext);
@@ -122,5 +139,3 @@ export const useBoxContext = () => useContext(BoxContext);
 export const Box = (props: BoxProps): JSX.Element => {
   return <InternalBox {...props} />;
 };
-
-Box.links = links;

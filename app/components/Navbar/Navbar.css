@@ -1,5 +1,15 @@
 #global-nav .site-title {
   color: var(--navbar-contrast-color);
+  font-family: "Cormorant Garamond", "Times New Roman", Times, serif;
+
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-7);
+  margin: var(--space-4) var(--space-0);
+}
+
+#global-nav .site-title span {
+  display: inline-block;
+  font-size: var(--font-size-8);
 }
 
 #global-nav .site-title .navbar-link {

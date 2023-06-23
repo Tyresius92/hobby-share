@@ -1,5 +1,7 @@
 import React, { useId } from "react";
 import styles from "./TextInput.css";
+import { useBoxContext } from "../Box/Box";
+import { AcceptableContrastRatios } from "../__internal__/colorContrastUtils";
 
 interface BaseTextInputProps
   extends Pick<
@@ -34,6 +36,7 @@ const TextInputWithForwardedRef = React.forwardRef(
   ): JSX.Element => {
     const inputId = useId();
     const errorId = useId();
+    const { getContrastColor } = useBoxContext();
 
     return (
       <div className="text-input-wrapper">
@@ -42,6 +45,14 @@ const TextInputWithForwardedRef = React.forwardRef(
           className={`text-input-label ${
             hiddenLabel ? ".visually-hidden" : ""
           }`}
+          style={
+            {
+              "--text-input-contrast-color": `var(--color-${getContrastColor(
+                ["gray-200", "gray-100"],
+                AcceptableContrastRatios.TEXT
+              )})`,
+            } as React.CSSProperties
+          }
         >
           {label}
         </label>
@@ -50,6 +61,7 @@ const TextInputWithForwardedRef = React.forwardRef(
           ref={ref}
           aria-describedby={errorId}
           aria-invalid={errorMessage ? true : undefined}
+          className="text-input-input"
           // using spread here to get value and onchange for free
           {...rest}
         />
@@ -94,8 +106,6 @@ export const TextInput = Object.assign(
   // For more information on declaring new properties on functions, see:
   // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html#properties-declarations-on-functions
   {
-    links,
+    // TODO: add icon support
   }
 );
-
-TextInput.links = links;

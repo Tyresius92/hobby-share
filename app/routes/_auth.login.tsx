@@ -7,7 +7,7 @@ import type {
 import { json, redirect } from "@remix-run/node";
 import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { Box, Button, Checkbox, TextInput } from "~/components";
+import { Box, Button, Checkbox, Text, TextInput } from "~/components";
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -67,12 +67,7 @@ export const action = async ({ request }: ActionArgs) => {
 
 export const meta: V2_MetaFunction = () => [{ title: "Login" }];
 
-export const links: LinksFunction = () => [
-  ...Box.links(),
-  ...Button.links(),
-  ...TextInput.links(),
-  ...Checkbox.links(),
-];
+export const links: LinksFunction = () => [];
 
 export default function LoginPage() {
   const [searchParams] = useSearchParams();
@@ -115,20 +110,22 @@ export default function LoginPage() {
 
         <input type="hidden" name="redirectTo" value={redirectTo} />
         <Button type="submit">Log in</Button>
-        <div>
+        <Box>
           <Checkbox name="remember" label="Remember me" />
-          <div>
-            Don't have an account?{" "}
-            <Link
-              to={{
-                pathname: "/join",
-                search: searchParams.toString(),
-              }}
-            >
-              Sign up
-            </Link>
-          </div>
-        </div>
+          <Box>
+            <Text>
+              Don't have an account?{" "}
+              <Link
+                to={{
+                  pathname: "/join",
+                  search: searchParams.toString(),
+                }}
+              >
+                Sign up
+              </Link>
+            </Text>
+          </Box>
+        </Box>
       </Form>
     </Box>
   );

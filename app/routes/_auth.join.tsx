@@ -199,6 +199,8 @@ export default function Join(): JSX.Element {
   useEffect(() => {
     if (actionData?.errors?.email) {
       emailRef.current?.focus();
+    } else if (actionData?.errors?.username) {
+      usernameRef.current?.focus();
     } else if (actionData?.errors?.password) {
       passwordRef.current?.focus();
     }
@@ -222,7 +224,6 @@ export default function Join(): JSX.Element {
           label="Username"
           ref={usernameRef}
           required
-          autoFocus={true}
           name="username"
           type="text"
           autoComplete="username"
@@ -233,7 +234,6 @@ export default function Join(): JSX.Element {
           label="First Name"
           ref={firstNameRef}
           required
-          autoFocus={true}
           name="firstName"
           type="text"
           autoComplete="firstName"
@@ -244,7 +244,6 @@ export default function Join(): JSX.Element {
           label="Last Name"
           ref={lastNameRef}
           required
-          autoFocus={true}
           name="lastName"
           type="text"
           autoComplete="lastName"
@@ -255,7 +254,6 @@ export default function Join(): JSX.Element {
           label="Password"
           ref={passwordRef}
           required
-          autoFocus={true}
           name="password"
           type="password"
           autoComplete="new-password"

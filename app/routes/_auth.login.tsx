@@ -122,7 +122,6 @@ export default function LoginPage(): JSX.Element {
           label="Password"
           ref={passwordRef}
           required
-          autoFocus={true}
           name="password"
           type="password"
           autoComplete="current-password"

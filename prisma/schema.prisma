@@ -18,10 +18,20 @@ model User {
   updatedAt DateTime @updatedAt
 
   password Password?
+  items    Item[]
 }
 
 model Password {
   hash String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model Item {
+  id          String @id @default(cuid())
+  name        String
+  description String
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique

@@ -13,7 +13,7 @@ import type { LinksFunction } from "@remix-run/server-runtime";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
-export const Navbar = () => {
+export const Navbar = (): JSX.Element => {
   const user = useOptionalUser();
 
   return (

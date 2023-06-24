@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Button.css";
+import type { LinksFunction } from "@remix-run/server-runtime";
 
 export interface ButtonProps
   extends Pick<
@@ -10,7 +11,7 @@ export interface ButtonProps
   variant?: "primary" | "secondary" | "tertiary" | "danger";
 }
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const Button = ({
   children,

@@ -3,8 +3,9 @@ import styles from "./Box.css";
 import type { ColorVariant } from "~/colors";
 import type { ContrastRatios } from "../__internal__/colorContrastUtils";
 import { getContrastColor } from "../__internal__/colorContrastUtils";
+import type { LinksFunction } from "@remix-run/server-runtime";
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export type SpaceOption =
   | 0
@@ -54,7 +55,7 @@ const wrappedGetColor =
   (
     desiredForegroundColor: ColorVariant | ColorVariant[],
     minimumContrastRatio: ContrastRatios
-  ) =>
+  ): ReturnType<typeof getContrastColor> =>
     getContrastColor(
       backgroundColor,
       desiredForegroundColor,
@@ -134,7 +135,7 @@ const BoxContext = createContext<BoxContextShape>({
   getContrastColor: wrappedGetColor("white"),
 });
 
-export const useBoxContext = () => useContext(BoxContext);
+export const useBoxContext = (): BoxContextShape => useContext(BoxContext);
 
 export const Box = (props: BoxProps): JSX.Element => {
   return <InternalBox {...props} />;

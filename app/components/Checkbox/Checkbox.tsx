@@ -2,8 +2,9 @@ import React, { useId } from "react";
 import styles from "./Checkbox.css";
 import { AcceptableContrastRatios } from "../__internal__/colorContrastUtils";
 import { useBoxContext } from "../Box/Box";
+import type { LinksFunction } from "@remix-run/server-runtime";
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 interface BaseCheckboxProps {
   label: string;

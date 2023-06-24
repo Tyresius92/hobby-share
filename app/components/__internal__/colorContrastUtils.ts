@@ -36,7 +36,7 @@ export const convertHexToRgb = (hex: HexCode): RgbObject => {
   };
 };
 
-export const getColorChannelChroma = (value: number) => {
+export const getColorChannelChroma = (value: number): number => {
   if (value < 0 || value > 255) {
     throw new Error(
       `Invalid color channel value. Value must be between 0 and 255, inclusive. Received ${value}`

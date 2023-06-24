@@ -2,6 +2,7 @@ import React, { useId } from "react";
 import styles from "./TextInput.css";
 import { useBoxContext } from "../Box/Box";
 import { AcceptableContrastRatios } from "../__internal__/colorContrastUtils";
+import type { LinksFunction } from "@remix-run/server-runtime";
 
 interface BaseTextInputProps
   extends Pick<
@@ -27,7 +28,7 @@ export type TextInputProps =
   | ControlledTextInputProps
   | UncontrolledTextInputProps;
 
-export const links = () => [{ rel: "stylesheet", href: styles }];
+export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 const TextInputWithForwardedRef = React.forwardRef(
   (

@@ -14,7 +14,7 @@ export const ExternalLink = ({
   children,
   newTab,
   ...rest
-}: ExternalLinkProps) => {
+}: ExternalLinkProps): JSX.Element => {
   const { backgroundColor } = useBoxContext();
 
   const newTabProps = newTab

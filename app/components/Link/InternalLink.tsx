@@ -9,7 +9,10 @@ import {
 
 export interface InternalLinkProps extends Omit<LinkProps, "className"> {}
 
-export const InternalLink = ({ children, ...rest }: InternalLinkProps) => {
+export const InternalLink = ({
+  children,
+  ...rest
+}: InternalLinkProps): JSX.Element => {
   const { backgroundColor } = useBoxContext();
 
   return (

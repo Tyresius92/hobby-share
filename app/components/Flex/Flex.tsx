@@ -1,9 +1,10 @@
+import type { LinksFunction } from "@remix-run/server-runtime";
 import { InternalBox, links as boxLinks } from "../Box/Box";
 import type { BoxProps, SpaceOption } from "../Box/Box";
 
 import flexStyles from "./Flex.css";
 
-export const links = () => [
+export const links: LinksFunction = () => [
   ...boxLinks(),
   { rel: "stylesheet", href: flexStyles },
 ];

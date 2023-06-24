@@ -17,6 +17,7 @@ module.exports = {
   // (so the linting plugins work nicely), but we have to
   // set the jest version explicitly.
   rules: {
+    // Base ESLint extension rules
     "default-param-last": "off",
     "@typescript-eslint/default-param-last": "error",
     "dot-notation": "off",
@@ -39,7 +40,22 @@ module.exports = {
     "@typescript-eslint/require-await": "error",
     "no-return-await": "off",
     "@typescript-eslint/return-await": "error",
+
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        allowExpressions: true,
+      },
+    ],
   },
+  overrides: [
+    {
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": "off",
+      },
+      files: ["./app/routes/**/*"],
+    },
+  ],
   settings: {
     jest: {
       version: 28,

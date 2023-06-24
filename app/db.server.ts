@@ -20,7 +20,11 @@ if (process.env.NODE_ENV === "production") {
   prisma = global.__db__;
 }
 
-function getClient() {
+function getClient(): PrismaClient<
+  { datasources: { db: { url: string } } },
+  never,
+  false
+> {
   const { DATABASE_URL } = process.env;
   invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
 

@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-async function seed() {
+async function seed(): Promise<void> {
   const email = "tyrel@hobbyshare.com";
 
   // cleanup the existing database
@@ -13,7 +13,7 @@ async function seed() {
 
   const hashedPassword = await bcrypt.hash("asdfasdf", 10);
 
-  await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
       email,
       username: "tyresius",
@@ -24,6 +24,22 @@ async function seed() {
           hash: hashedPassword,
         },
       },
+    },
+  });
+
+  await prisma.item.create({
+    data: {
+      name: "Knitting Needles",
+      description: "For socks",
+      ownerId: user.id,
+    },
+  });
+
+  await prisma.item.create({
+    data: {
+      name: "Crochet Hook",
+      description: "For blankets",
+      ownerId: user.id,
     },
   });
 

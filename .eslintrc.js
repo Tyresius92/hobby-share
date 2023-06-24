@@ -48,14 +48,6 @@ module.exports = {
       },
     ],
   },
-  overrides: [
-    {
-      rules: {
-        "@typescript-eslint/explicit-function-return-type": "off",
-      },
-      files: ["./app/routes/**/*"],
-    },
-  ],
   settings: {
     jest: {
       version: 28,

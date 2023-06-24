@@ -2,6 +2,7 @@ import type {
   ActionArgs,
   LinksFunction,
   LoaderArgs,
+  TypedResponse,
   V2_MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
@@ -20,14 +21,27 @@ import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({
+  request,
+}: LoaderArgs): Promise<TypedResponse<{}>> => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
   return json({});
 };
 
+interface ErrorDetails {
+  email: string | null;
+  password: string | null;
+}
+
 // TODO: make it possible to sign in with email OR username
-export const action = async ({ request }: ActionArgs) => {
+export const action = async ({
+  request,
+}: ActionArgs): Promise<
+  TypedResponse<{
+    errors?: ErrorDetails;
+  }>
+> => {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
@@ -76,7 +90,7 @@ export const meta: V2_MetaFunction = () => [{ title: "Login" }];
 
 export const links: LinksFunction = () => [];
 
-export default function LoginPage() {
+export default function LoginPage(): JSX.Element {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") || "/";
   const actionData = useActionData<typeof action>();

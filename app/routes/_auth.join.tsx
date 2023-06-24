@@ -15,7 +15,9 @@ import { createUser, getUserByEmail } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({
+  request,
+}: LoaderArgs): Promise<TypedResponse<{}>> => {
   const userId = await getUserId(request);
   if (userId) return redirect("/");
   return json({});
@@ -184,7 +186,7 @@ export const meta: V2_MetaFunction = () => [{ title: "Sign Up" }];
 
 export const links: LinksFunction = () => [];
 
-export default function Join() {
+export default function Join(): JSX.Element {
   const [searchParams] = useSearchParams();
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const actionData = useActionData<typeof action>();

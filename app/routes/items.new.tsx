@@ -69,7 +69,7 @@ export const action = async ({
   return redirect(`/items/${todo.id}`);
 };
 
-export default function NewItem() {
+export default function NewItem(): JSX.Element {
   return (
     <Box mx={8} my={4}>
       <Heading>Create an item</Heading>

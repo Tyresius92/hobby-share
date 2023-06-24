@@ -5,7 +5,7 @@ export const meta: V2_MetaFunction = () => [{ title: "Hobby Share" }];
 
 export const links: LinksFunction = () => [];
 
-export default function Index() {
+export default function Index(): JSX.Element {
   return (
     <main>
       <Box my={4} mx={8}>

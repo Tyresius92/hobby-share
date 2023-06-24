@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-export default function MyAccount() {
+export default function MyAccount(): JSX.Element {
   const { user } = useLoaderData();
   return (
     <main>

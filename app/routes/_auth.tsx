@@ -5,7 +5,7 @@ import type { LinksFunction } from "@remix-run/server-runtime";
 
 export const links: LinksFunction = () => [];
 
-export default function AuthLayout() {
+export default function AuthLayout(): JSX.Element {
   return (
     <Box mx={8} my={4}>
       <Outlet />

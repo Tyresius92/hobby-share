@@ -3,7 +3,7 @@ import type { LoaderArgs } from "@remix-run/node";
 
 import { prisma } from "~/db.server";
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderArgs): Promise<Response> => {
   const host =
     request.headers.get("X-Forwarded-Host") ?? request.headers.get("host");
 

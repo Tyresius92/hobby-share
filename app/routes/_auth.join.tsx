@@ -6,9 +6,9 @@ import type {
   V2_MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { Form, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { Box, Button, Text, TextInput } from "~/components";
+import { Box, Button, InternalLink, Text, TextInput } from "~/components";
 import { getUserByUsername } from "~/models/user.server";
 
 import { createUser, getUserByEmail } from "~/models/user.server";
@@ -265,14 +265,14 @@ export default function Join() {
         <Box>
           <Text>
             Already have an account?{" "}
-            <Link
+            <InternalLink
               to={{
                 pathname: "/login",
                 search: searchParams.toString(),
               }}
             >
               Log in
-            </Link>
+            </InternalLink>
           </Text>
         </Box>
       </Form>

@@ -1,0 +1,7 @@
+.link-component {
+  color: var(--link-contrast-color);
+}
+
+.link-component:hover {
+  text-decoration: none;
+}

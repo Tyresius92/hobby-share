@@ -5,9 +5,16 @@ import type {
   V2_MetaFunction,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData, useSearchParams } from "@remix-run/react";
+import { Form, useActionData, useSearchParams } from "@remix-run/react";
 import { useEffect, useRef } from "react";
-import { Box, Button, Checkbox, Text, TextInput } from "~/components";
+import {
+  Box,
+  Button,
+  Checkbox,
+  InternalLink,
+  Text,
+  TextInput,
+} from "~/components";
 
 import { verifyLogin } from "~/models/user.server";
 import { createUserSession, getUserId } from "~/session.server";
@@ -115,14 +122,14 @@ export default function LoginPage() {
           <Box>
             <Text>
               Don't have an account?{" "}
-              <Link
+              <InternalLink
                 to={{
                   pathname: "/join",
                   search: searchParams.toString(),
                 }}
               >
                 Sign up
-              </Link>
+              </InternalLink>
             </Text>
           </Box>
         </Box>

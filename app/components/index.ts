@@ -5,6 +5,7 @@ import { links as buttonLinks } from "./Button/Button";
 import { links as checkboxLinks } from "./Checkbox/Checkbox";
 import { links as flexLinks } from "./Flex/Flex";
 import { links as headingLinks } from "./Heading/Heading";
+import { links as linkLinks } from "./Link/sharedLink";
 import { links as navbarLinks } from "./Navbar/Navbar";
 import { links as textLinks } from "./Text/Text";
 import { links as textInputLinks } from "./TextInput/TextInput";
@@ -24,6 +25,11 @@ export type { FlexProps } from "./Flex/Flex";
 export { Heading } from "./Heading/Heading";
 export type { HeadingProps } from "./Heading/Heading";
 
+export { ExternalLink } from "./Link/ExternalLink";
+export type { ExternalLinkProps } from "./Link/ExternalLink";
+export { InternalLink } from "./Link/InternalLink";
+export type { InternalLinkProps } from "./Link/InternalLink";
+
 export { Navbar } from "./Navbar/Navbar";
 
 export { Text } from "./Text/Text";
@@ -38,6 +44,7 @@ export const componentLibraryLinks: LinksFunction = () => [
   ...checkboxLinks(),
   ...flexLinks(),
   ...headingLinks(),
+  ...linkLinks(),
   ...navbarLinks(),
   ...textLinks(),
   ...textInputLinks(),

@@ -45,6 +45,15 @@ export async function getUser(request: Request): Promise<User | null> {
   throw await logout(request);
 }
 
+/**
+ * Helper function for use in loaders and actions.
+ * Gets the User ID of the current user, redirecting to the
+ * login page instead if they are not logged in.
+ *
+ * @param request
+ * @param redirectTo
+ * @returns
+ */
 export async function requireUserId(
   request: Request,
   redirectTo: string = new URL(request.url).pathname

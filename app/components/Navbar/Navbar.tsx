@@ -47,6 +47,9 @@ export const Navbar = (): JSX.Element => {
                 <Link to="/my-account" className="navbar-link">
                   My Account
                 </Link>
+                <Link to="/items" className="navbar-link">
+                  My Items
+                </Link>
                 <Form action="/logout" method="post">
                   <button className="navbar-logout-button" type="submit">
                     Logout

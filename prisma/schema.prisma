@@ -34,5 +34,5 @@ model Item {
   description String
 
   owner   User   @relation(fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  ownerId String @unique
+  ownerId String
 }

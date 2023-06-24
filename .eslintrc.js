@@ -47,6 +47,7 @@ module.exports = {
         allowExpressions: true,
       },
     ],
+    "react/jsx-key": "error",
   },
   settings: {
     jest: {

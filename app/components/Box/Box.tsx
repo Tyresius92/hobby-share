@@ -85,7 +85,7 @@ export const InternalBox = ({
 }: InternalBoxProps): JSX.Element => {
   return (
     <div
-      className={`box-component ${bg ? "box-component-background" : ""} ${
+      className={`box-component${bg ? " box-component-background" : ""} ${
         className ?? ""
       }`}
       style={

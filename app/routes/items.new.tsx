@@ -71,7 +71,7 @@ export const action = async ({
 
 export default function NewItem(): JSX.Element {
   return (
-    <Box mx={8} my={4}>
+    <Box>
       <Heading>Create an item</Heading>
       <Form method="post">
         <TextInput label="Item Name" name="itemName" type="text" />

@@ -6,7 +6,7 @@ import type {
   TypedResponse,
 } from "@remix-run/server-runtime";
 import { json, redirect } from "@remix-run/server-runtime";
-import { Box, ExternalLink, Heading, InternalLink, Text } from "~/components";
+import { Box, Heading, InternalLink, Text } from "~/components";
 import { getUser } from "~/session.server";
 import type { V2_MetaFunction } from "@remix-run/node";
 import type { Item, User } from "@prisma/client";

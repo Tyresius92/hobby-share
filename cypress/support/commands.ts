@@ -44,10 +44,16 @@ declare global {
 
 function login({
   email = faker.internet.email(undefined, undefined, "example.com"),
+  username = faker.internet.userName(),
+  firstName = faker.person.firstName(),
+  lastName = faker.person.lastName(),
 }: {
   email?: string;
-} = {}) {
-  cy.then(() => ({ email })).as("user");
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+} = {}): Cypress.Chainable<JQuery<HTMLElement>> {
+  cy.then(() => ({ email, username, firstName, lastName })).as("user");
   cy.exec(
     `npx ts-node --require tsconfig-paths/register ./cypress/support/create-user.ts "${email}"`
   ).then(({ stdout }) => {
@@ -59,21 +65,21 @@ function login({
   return cy.get("@user");
 }
 
-function cleanupUser({ email }: { email?: string } = {}) {
+function cleanupUser({ email }: { email?: string } = {}): void {
   if (email) {
     deleteUserByEmail(email);
   } else {
     cy.get("@user").then((user) => {
-      const email = (user as { email?: string }).email;
-      if (email) {
-        deleteUserByEmail(email);
+      const userEmail = (user as { email?: string }).email;
+      if (userEmail) {
+        deleteUserByEmail(userEmail);
       }
     });
   }
   cy.clearCookie("__session");
 }
 
-function deleteUserByEmail(email: string) {
+function deleteUserByEmail(email: string): void {
   cy.exec(
     `npx ts-node --require tsconfig-paths/register ./cypress/support/delete-user.ts "${email}"`
   );
@@ -85,7 +91,7 @@ function deleteUserByEmail(email: string) {
 // Also added custom types to avoid getting detached
 // https://github.com/cypress-io/cypress/issues/7306#issuecomment-1152752612
 // ===========================================================
-function visitAndCheck(url: string, waitTime: number = 1000) {
+function visitAndCheck(url: string, waitTime: number = 1000): void {
   cy.visit(url);
   cy.location("pathname").should("contain", url).wait(waitTime);
 }

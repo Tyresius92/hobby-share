@@ -32,6 +32,7 @@ interface ErrorData {
 }
 
 // TODO: combine these checks so that multiple errors can come back at once
+// consider how the auto-focus behavior should work for multiple errors
 export const action = async ({
   request,
 }: ActionArgs): Promise<

@@ -11,6 +11,7 @@ import { getUser } from "~/session.server";
 import type { V2_MetaFunction } from "@remix-run/node";
 import type { Item, User } from "@prisma/client";
 import { getItemsByUserId } from "~/models/item.server";
+import { Subheading } from "~/components/Subheading/Subheading";
 
 export const links: LinksFunction = () => [];
 
@@ -50,7 +51,7 @@ export default function MyAccount(): JSX.Element {
         <pre>{JSON.stringify(user, undefined, 2)}</pre>
       </Box>
       <Box>
-        <h2>My Items</h2>
+        <Subheading>My Items</Subheading>
         <Text>
           <InternalLink to="/items">See all items</InternalLink>
         </Text>
@@ -74,17 +75,6 @@ export default function MyAccount(): JSX.Element {
             </ul>
           )}
         </Box>
-      </Box>
-      <Box>
-        <h2>Generic todos</h2>
-        <Text>
-          TODO: Make a subheading component and swap it in for the h2s on this
-          page
-        </Text>
-        <Text>TODO: Add support for password resets</Text>
-        <Text>TODO: Add support for changing email addresses</Text>
-        <Text>TODO: Add support for changing username</Text>
-        <Text>TODO: Add a button (with modal) to delete my account</Text>
       </Box>
     </main>
   );

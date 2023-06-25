@@ -61,12 +61,12 @@ export const action = async ({
     );
   }
 
-  const todo = await createItem({
+  const item = await createItem({
     name: itemName,
     description,
     ownerId: userId,
   });
-  return redirect(`/items/${todo.id}`);
+  return redirect(`/items/${item.id}`);
 };
 
 export default function NewItem(): JSX.Element {

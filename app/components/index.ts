@@ -7,6 +7,7 @@ import { links as flexLinks } from "./Flex/Flex";
 import { links as headingLinks } from "./Heading/Heading";
 import { links as linkLinks } from "./Link/sharedLink";
 import { links as navbarLinks } from "./Navbar/Navbar";
+import { links as subheadingLinks } from "./Subheading/Subheading";
 import { links as textLinks } from "./Text/Text";
 import { links as textInputLinks } from "./TextInput/TextInput";
 
@@ -32,6 +33,9 @@ export type { InternalLinkProps } from "./Link/InternalLink";
 
 export { Navbar } from "./Navbar/Navbar";
 
+export { Subheading } from "./Subheading/Subheading";
+export type { SubheadingProps } from "./Subheading/Subheading";
+
 export { Text } from "./Text/Text";
 export type { TextProps } from "./Text/Text";
 
@@ -46,6 +50,7 @@ export const componentLibraryLinks: LinksFunction = () => [
   ...headingLinks(),
   ...linkLinks(),
   ...navbarLinks(),
+  ...subheadingLinks(),
   ...textLinks(),
   ...textInputLinks(),
 ];

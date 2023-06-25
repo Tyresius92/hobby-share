@@ -1,0 +1,12 @@
+.subheading-component {
+  font-family: "Cormorant Garamond", "Times New Roman", Times, serif;
+
+  margin: 0;
+  margin-bottom: var(--space-3);
+  margin-top: var(--space-2);
+  font-weight: var(--font-weight-bold);
+
+  color: var(--subheading-contrast-color);
+
+  font-size: var(--font-size-5);
+}

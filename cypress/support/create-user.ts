@@ -23,6 +23,9 @@ async function createAndLogin(email: string): Promise<void> {
   const user = await createUser(
     {
       email,
+      username: email.split('@')[0],
+      firstName: 'Bob',
+      lastName: 'Loblaw'
     },
     "myreallystrongpassword"
   );

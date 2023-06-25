@@ -47,6 +47,7 @@ module.exports = {
         allowExpressions: true,
       },
     ],
+    "object-shorthand": "error",
     "react/jsx-key": "error",
   },
   settings: {

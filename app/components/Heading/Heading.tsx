@@ -19,8 +19,8 @@ export const Heading = ({ children }: HeadingProps): JSX.Element => {
       style={
         {
           "--heading-contrast-color": `var(--color-${getContrastColor(
-            ["gray-200", "gray-100"],
-            AcceptableContrastRatios.TEXT
+            ['blue-900', "gray-200", "gray-100"],
+            AcceptableContrastRatios.LARGE_TEXT
           )})`,
         } as React.CSSProperties
       }

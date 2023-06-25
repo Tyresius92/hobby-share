@@ -1,3 +1,12 @@
 .heading-component {
+  font-family: "Cormorant Garamond", "Times New Roman", Times, serif;
+
+  margin: 0;
+  margin-bottom: var(--space-5);
+  margin-top: var(--space-4);
+  font-weight: var(--font-weight-bold);
+
   color: var(--heading-contrast-color);
+
+  font-size: var(--font-size-8);
 }

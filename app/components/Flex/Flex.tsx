@@ -1,11 +1,10 @@
 import type { LinksFunction } from "@remix-run/server-runtime";
-import { InternalBox, links as boxLinks } from "../Box/Box";
+import { InternalBox } from "../Box/Box";
 import type { BoxProps, SpaceOption } from "../Box/Box";
 
 import flexStyles from "./Flex.css";
 
 export const links: LinksFunction = () => [
-  ...boxLinks(),
   { rel: "stylesheet", href: flexStyles },
 ];
 
@@ -35,10 +34,10 @@ export const Flex = ({
       className="flex-component"
       style={
         {
-          "--flex-comp-direction": flexDirection,
-          "--flex-comp-gap": `var(--space-${gap})`,
-          "--flex-comp-justify-content": justifyContent,
-          "--flex-comp-align-items": alignItems,
+          flexDirection,
+          gap: `var(--space-${gap})`,
+          justifyContent,
+          alignItems,
         } as React.CSSProperties
       }
       {...rest}

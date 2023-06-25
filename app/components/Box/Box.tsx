@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
-import styles from "./Box.css";
 import type { ColorVariant } from "~/colors";
 import type { ContrastRatios } from "../__internal__/colorContrastUtils";
 import { getContrastColor } from "../__internal__/colorContrastUtils";
+import styles from "./Box.css";
 import type { LinksFunction } from "@remix-run/server-runtime";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
@@ -85,23 +85,19 @@ export const InternalBox = ({
 }: InternalBoxProps): JSX.Element => {
   return (
     <div
-      className={`box-component${bg ? " box-component-background" : ""} ${
-        className ?? ""
-      }`}
+      className={`box-component${className ? ` ${className}` : ""}`}
       style={
         {
           ...style,
-          "--box-comp-padding-block-start": `var(--space-${pt})`,
-          "--box-comp-padding-block-end": `var(--space-${pb})`,
-          "--box-comp-padding-inline-start": `var(--space-${pl})`,
-          "--box-comp-padding-inline-end": `var(--space-${pr})`,
-          "--box-comp-margin-block-start": `var(--space-${mt})`,
-          "--box-comp-margin-block-end": `var(--space-${mb})`,
-          "--box-comp-margin-inline-start": `var(--space-${ml})`,
-          "--box-comp-margin-inline-end": `var(--space-${mr})`,
-          ...(bg && {
-            "--box-comp-background-color": `var(--color-${bg})`,
-          }),
+          ...(pt && { "padding-block-start": `var(--space-${pt})` }),
+          ...(pb && { "padding-block-end": `var(--space-${pb})` }),
+          ...(pl && { "padding-inline-start": `var(--space-${pl})` }),
+          ...(pr && { "padding-inline-end": `var(--space-${pr})` }),
+          ...(mt && { "margin-block-start": `var(--space-${mt})` }),
+          ...(mb && { "margin-block-end": `var(--space-${mb})` }),
+          ...(ml && { "margin-inline-start": `var(--space-${ml})` }),
+          ...(mr && { "margin-inline-end": `var(--space-${mr})` }),
+          ...(bg && { "background-color": `var(--color-${bg})` }),
         } as React.CSSProperties
       }
       {...rest}

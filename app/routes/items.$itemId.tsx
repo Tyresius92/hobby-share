@@ -49,7 +49,7 @@ export default function ItemDetailsPage(): JSX.Element {
   const { item } = useLoaderData();
 
   return (
-    <Box my={4} mx={8}>
+    <Box>
       <Heading>Item Details</Heading>
       <pre>{JSON.stringify(item, undefined, 2)}</pre>
       <Form method="post">

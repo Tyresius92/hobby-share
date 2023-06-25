@@ -46,7 +46,7 @@ function login({
   email = faker.internet.email(undefined, undefined, "example.com"),
 }: {
   email?: string;
-} = {}) {
+} = {}): Cypress.Chainable<JQuery<HTMLElement>> {
   cy.then(() => ({ email })).as("user");
   cy.exec(
     `npx ts-node --require tsconfig-paths/register ./cypress/support/create-user.ts "${email}"`

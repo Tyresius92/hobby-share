@@ -1,31 +1,31 @@
 import React from "react";
-import styles from "./Heading.css";
+import styles from "./Subheading.css";
 import type { LinksFunction } from "@remix-run/server-runtime";
 import { AcceptableContrastRatios } from "../__internal__/colorContrastUtils";
 import { useBoxContext } from "../Box/Box";
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
-export interface HeadingProps {
+export interface SubheadingProps {
   children: React.ReactNode;
 }
 
-export const Heading = ({ children }: HeadingProps): JSX.Element => {
+export const Subheading = ({ children }: SubheadingProps): JSX.Element => {
   const { getContrastColor } = useBoxContext();
 
   return (
-    <h1
-      className="heading-component"
+    <h2
+      className="subheading-component"
       style={
         {
-          "--heading-contrast-color": `var(--color-${getContrastColor(
-            ["blue-900", "gray-200", "gray-100"],
+          "--subheading-contrast-color": `var(--color-${getContrastColor(
+            ["gray-200", "gray-100"],
             AcceptableContrastRatios.LARGE_TEXT
           )})`,
         } as React.CSSProperties
       }
     >
       {children}
-    </h1>
+    </h2>
   );
 };

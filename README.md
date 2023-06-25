@@ -224,7 +224,7 @@ Open `~/prisma/schema.prisma`, and modify the file to reflect the new desired st
 
 Then, run `npx prisma migrate dev` to apply your changes.
 
-#### If your changes break the schemaa
+#### If your changes break the schemaaa
 
 You can run `npx prisma migrate reset` to drop your local DB. It will try to run the seed command, but it will likely fail, unless you've updated `~/prisma/seed.ts` already. (You should do this anyway.)
 

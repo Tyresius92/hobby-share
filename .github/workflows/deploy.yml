@@ -36,6 +36,9 @@ jobs:
       - name: 🔬 Lint
         run: npm run lint
 
+      - name: 😻 Prettier
+        run: npm run prettier:check
+
   typecheck:
     name: ʦ TypeScript
     runs-on: ubuntu-latest

@@ -11,7 +11,7 @@
     "dev:remix": "cross-env NODE_ENV=development remix watch",
     "dev:server": "cross-env NODE_ENV=development node --inspect --require ./node_modules/dotenv/config --require ./mocks ./build/server.js",
     "docker": "docker-compose up -d",
-    "prettier:check": "prettier .",
+    "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint ./app",
     "lint:fix": "npm run lint -- --fix",

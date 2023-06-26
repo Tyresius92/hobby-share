@@ -43,7 +43,11 @@ declare global {
 }
 
 function login({
-  email = faker.internet.email(undefined, undefined, "example.com"),
+  email = faker.internet.email({
+    firstName: undefined,
+    lastName: undefined,
+    provider: "example.com",
+  }),
   username = faker.internet.userName(),
   firstName = faker.person.firstName(),
   lastName = faker.person.lastName(),

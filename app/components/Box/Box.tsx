@@ -89,15 +89,15 @@ export const InternalBox = ({
       style={
         {
           ...style,
-          ...(pt && { "padding-block-start": `var(--space-${pt})` }),
-          ...(pb && { "padding-block-end": `var(--space-${pb})` }),
-          ...(pl && { "padding-inline-start": `var(--space-${pl})` }),
-          ...(pr && { "padding-inline-end": `var(--space-${pr})` }),
-          ...(mt && { "margin-block-start": `var(--space-${mt})` }),
-          ...(mb && { "margin-block-end": `var(--space-${mb})` }),
-          ...(ml && { "margin-inline-start": `var(--space-${ml})` }),
-          ...(mr && { "margin-inline-end": `var(--space-${mr})` }),
-          ...(bg && { "background-color": `var(--color-${bg})` }),
+          ...(pt && { paddingBlockStart: `var(--space-${pt})` }),
+          ...(pb && { paddingBlockEnd: `var(--space-${pb})` }),
+          ...(pl && { paddingInlineStart: `var(--space-${pl})` }),
+          ...(pr && { paddingInlineEnd: `var(--space-${pr})` }),
+          ...(mt && { marginBlockStart: `var(--space-${mt})` }),
+          ...(mb && { marginBlockEnd: `var(--space-${mb})` }),
+          ...(ml && { marginInlineStart: `var(--space-${ml})` }),
+          ...(mr && { marginInlineEnd: `var(--space-${mr})` }),
+          ...(bg && { backgroundColor: `var(--color-${bg})` }),
         } as React.CSSProperties
       }
       {...rest}

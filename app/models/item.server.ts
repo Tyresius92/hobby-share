@@ -33,6 +33,20 @@ export const createItem = (item: ItemDetails): Promise<Item> => {
   });
 };
 
+export const updateItem = (
+  itemId: Item["id"],
+  item: ItemDetails
+): Promise<Item> => {
+  return prisma.item.update({
+    where: {
+      id: itemId,
+    },
+    data: {
+      ...item,
+    },
+  });
+};
+
 export const deleteItem = ({
   id,
   ownerId,

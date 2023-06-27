@@ -66,8 +66,11 @@ export async function requireUserId(
   return userId;
 }
 
-export async function requireUser(request: Request): Promise<User> {
-  const userId = await requireUserId(request);
+export async function requireUser(
+  request: Request,
+  redirectTo?: string
+): Promise<User> {
+  const userId = await requireUserId(request, redirectTo);
 
   const user = await getUserById(userId);
   if (user) return user;

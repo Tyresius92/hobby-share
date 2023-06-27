@@ -17,9 +17,10 @@ export const Button = ({
   children,
   onClick,
   variant = "primary",
+  ...rest
 }: ButtonProps): JSX.Element => {
   return (
-    <button className={`button btn-${variant}`} onClick={onClick}>
+    <button {...rest} className={`button btn-${variant}`} onClick={onClick}>
       {children}
     </button>
   );

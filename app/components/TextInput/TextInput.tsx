@@ -7,7 +7,12 @@ import type { LinksFunction } from "@remix-run/server-runtime";
 interface BaseTextInputProps
   extends Pick<
     React.InputHTMLAttributes<HTMLInputElement>,
-    "required" | "autoFocus" | "autoComplete" | "placeholder"
+    | "required"
+    | "autoFocus"
+    | "autoComplete"
+    | "placeholder"
+    | "pattern"
+    | "defaultValue"
   > {
   label: string;
   hiddenLabel?: boolean;

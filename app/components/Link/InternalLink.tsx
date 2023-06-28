@@ -7,7 +7,9 @@ import {
   getContrastColor,
 } from "../__internal__/colorContrastUtils";
 
-export interface InternalLinkProps extends Omit<LinkProps, "className"> {}
+export interface InternalLinkProps extends Omit<LinkProps, "className"> {
+  children: React.ReactNode;
+}
 
 export const InternalLink = ({
   children,

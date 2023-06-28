@@ -1,5 +1,6 @@
 import type { LinksFunction } from "@remix-run/server-runtime";
 
+import { links as alertModalLinks } from "./AlertModal/AlertModal";
 import { links as boxLinks } from "./Box/Box";
 import { links as buttonLinks } from "./Button/Button";
 import { links as checkboxLinks } from "./Checkbox/Checkbox";
@@ -10,6 +11,9 @@ import { links as navbarLinks } from "./Navbar/Navbar";
 import { links as subheadingLinks } from "./Subheading/Subheading";
 import { links as textLinks } from "./Text/Text";
 import { links as textInputLinks } from "./TextInput/TextInput";
+
+export { AlertModal } from "./AlertModal/AlertModal";
+export type { AlertModalProps } from "./AlertModal/AlertModal";
 
 export { Box } from "./Box/Box";
 export type { BoxProps } from "./Box/Box";
@@ -43,6 +47,7 @@ export { TextInput } from "./TextInput/TextInput";
 export type { TextInputProps } from "./TextInput/TextInput";
 
 export const componentLibraryLinks: LinksFunction = () => [
+  ...alertModalLinks(),
   ...boxLinks(),
   ...buttonLinks(),
   ...checkboxLinks(),

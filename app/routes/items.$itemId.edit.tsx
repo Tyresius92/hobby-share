@@ -1,20 +1,29 @@
-import { Form } from "@remix-run/react";
+import { Form, useLoaderData } from "@remix-run/react";
 import type {
   ActionArgs,
-  LoaderFunction,
+  LoaderArgs,
   TypedResponse,
 } from "@remix-run/server-runtime";
-import { redirect } from "@remix-run/server-runtime";
-import { json } from "@remix-run/server-runtime";
+import { json, redirect } from "@remix-run/server-runtime";
 import React from "react";
 import { Box, Button, Heading, TextInput } from "~/components";
-import { createItem } from "~/models/item.server";
-import { requireUser, requireUserId } from "~/session.server";
+import type { Item } from "~/models/item.server";
+import { getItemById, updateItem } from "~/models/item.server";
+import { requireUserId } from "~/session.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  await requireUser(request);
+export const loader = async ({
+  params,
+}: LoaderArgs): Promise<TypedResponse<{ item: Item | null }>> => {
+  const { itemId } = params;
+  if (!itemId) {
+    throw new Error("No itemId param set");
+  }
 
-  return json({ ok: true });
+  const item = await getItemById(itemId);
+
+  return json({
+    item,
+  });
 };
 
 interface ErrorData {
@@ -24,6 +33,7 @@ interface ErrorData {
 
 export const action = async ({
   request,
+  params,
 }: ActionArgs): Promise<
   TypedResponse<{
     errors?: ErrorData;
@@ -31,6 +41,11 @@ export const action = async ({
 > => {
   const userId = await requireUserId(request);
   const formData = await request.formData();
+
+  const { itemId } = params;
+  if (!itemId) {
+    throw new Error("No itemId param set");
+  }
 
   const itemName = formData.get("itemName");
   const description = formData.get("description");
@@ -59,7 +74,7 @@ export const action = async ({
     );
   }
 
-  const item = await createItem({
+  const item = await updateItem(itemId, {
     name: itemName,
     description,
     ownerId: userId,
@@ -67,14 +82,26 @@ export const action = async ({
   return redirect(`/items/${item.id}`);
 };
 
-export default function NewItem(): JSX.Element {
+export default function EditItem(): JSX.Element {
+  const { item } = useLoaderData();
+
   return (
     <Box>
-      <Heading>Create an item</Heading>
+      <Heading>Edit item</Heading>
       <Form method="post">
-        <TextInput label="Item Name" name="itemName" type="text" />
-        <TextInput label="Item Description" name="description" type="text" />
-        <Button type="submit">Create Item</Button>
+        <TextInput
+          label="Item Name"
+          name="itemName"
+          type="text"
+          defaultValue={item.name}
+        />
+        <TextInput
+          label="Item Description"
+          name="description"
+          type="text"
+          defaultValue={item.description}
+        />
+        <Button type="submit">Save Item</Button>
       </Form>
     </Box>
   );
